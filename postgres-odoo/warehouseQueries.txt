@@ -1,0 +1,51 @@
+-- query to list stock in all warehouses
+SELECT stock_inventory_line.product_qty, stock_inventory_line.product_code, stock_inventory_line.product_name, stock_warehouse.code
+FROM stock_inventory_line
+inner join stock_warehouse on stock_inventory_line.location_id = stock_warehouse.lot_stock_id;
+
+-- quary for stock in warehouses, ordered by warehouse
+
+SELECT stock_inventory_line.product_qty as Quantity, stock_inventory_line.product_code as "Product Code", stock_inventory_line.product_name as "Product Name", stock_warehouse.code as "Warehouse"
+FROM stock_warehouse 
+inner join stock_inventory_line on stock_inventory_line.location_id = stock_warehouse.lot_stock_id
+order by stock_warehouse.code;
+
+-- stock quantities in WH
+
+SELECT stock_inventory_line.product_qty as Quantity, stock_inventory_line.product_code as "Product Code", stock_inventory_line.product_name as "Product Name", stock_warehouse.code as "Warehouse"
+FROM stock_warehouse 
+inner join stock_inventory_line on stock_inventory_line.location_id = stock_warehouse.lot_stock_id
+where stock_warehouse.code='WH';
+
+-- stock in MG
+
+SELECT stock_inventory_line.product_qty as Quantity, stock_inventory_line.product_code as "Product Code", stock_inventory_line.product_name as "Product Name", stock_warehouse.code as "Warehouse"
+FROM stock_warehouse 
+inner join stock_inventory_line on stock_inventory_line.location_id = stock_warehouse.lot_stock_id
+where stock_warehouse.code='MG';
+
+-- stock in RI
+
+SELECT stock_inventory_line.product_qty as Quantity, stock_inventory_line.product_code as "Product Code", stock_inventory_line.product_name as "Product Name", stock_warehouse.code as "Warehouse"
+FROM stock_warehouse 
+inner join stock_inventory_line on stock_inventory_line.location_id = stock_warehouse.lot_stock_id
+where stock_warehouse.code='RI';
+
+-- stock in JM
+
+SELECT stock_inventory_line.product_qty as Quantity, stock_inventory_line.product_code as "Product Code", stock_inventory_line.product_name as "Product Name", stock_warehouse.code as "Warehouse"
+FROM stock_warehouse 
+inner join stock_inventory_line on stock_inventory_line.location_id = stock_warehouse.lot_stock_id
+where stock_warehouse.code='JM';
+
+
+From Odoo
+SELECT product_id, Sum(product_qty)
+FROM stock_move W
+WHERE (location_dest_id=12)
+GROUP BY product_id;
+
+SELECT product_id, Sum(product_qty)
+FROM stock_move
+WHERE view_src_location Like '12'
+GROUP BY product_id;
